@@ -1,0 +1,988 @@
+/* FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+/* DELETING DEFAULT MARGINS  */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* DEFENING ALL COLOR AT A TIME*/
+:root {
+    --background-color: #163031;
+    --item-background-color: #243C3D;
+    --btn-color-primay: #E0FF79;
+    --btn-color-accent: #76FDD0;
+    --hover-text-color: #6BFDD9;
+    --white: #F8F8F8;
+    --black: #163031;
+    --navbar-background: #FFFFFF0F;
+    --grid-line-color: #FFFFFF0F;
+    --input-fields: #294142;
+    --input-container: #1F3839;
+
+    /* fonts */
+    --font-primary: 'Montserrat', sans-serif;
+
+}
+
+/*STYLING FOR CURSOR GLOW*/
+.cursor-glow {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, #E0FF79, #76FDD0);
+    filter: blur(15px);
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease;
+}
+
+/* STYLING TO BODY*/
+body {
+    font-family: 'Montserrat', sans-serif;
+
+
+}
+
+
+.main-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+
+    background:
+        linear-gradient(90deg,
+            transparent calc(7.4% - 0.25px),
+            var(--grid-line-color) calc(7.4% - 0.25px),
+            var(--grid-line-color) calc(7.4% + 0.25px),
+            transparent calc(7.4% + 0.25px)),
+        linear-gradient(90deg,
+            transparent calc(28.65% - 0.25px),
+            var(--grid-line-color) calc(28.65% - 0.25px),
+            var(--grid-line-color) calc(28.65% + 0.25px),
+            transparent calc(28.65% + 0.25px)),
+        linear-gradient(90deg,
+            transparent calc(49.9% - 0.25px),
+            var(--grid-line-color) calc(49.9% - 0.25px),
+            var(--grid-line-color) calc(49.9% + 0.25px),
+            transparent calc(49.9% + 0.25px)),
+        linear-gradient(90deg,
+            transparent calc(71.15% - 0.25px),
+            var(--grid-line-color) calc(71.15% - 0.25px),
+            var(--grid-line-color) calc(71.15% + 0.25px),
+            transparent calc(71.15% + 0.25px)),
+        linear-gradient(90deg,
+            transparent calc(92.4% - 0.25px),
+            var(--grid-line-color) calc(92.4% - 0.25px),
+            var(--grid-line-color) calc(92.4% + 0.25px),
+            transparent calc(92.4% + 0.25px));
+}
+
+.main-container {
+    min-height: 100vh;
+    width: 100%;
+    /* background moved to ::after so grid (::before) can sit above it */
+    padding-top: 15px;
+    position: relative;
+    /* creates stacking context for ::before/::after */
+    overflow: visible;
+    /* allow page to scroll */
+}
+
+.main-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    /* background layer */
+    background-color: var(--background-color);
+}
+
+/* animated light that moves top -> bottom across the grid */
+.grid-highlight {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 0.2px;
+    /* fixed visual width */
+    pointer-events: none;
+    z-index: 2;
+    /* above grid lines */
+    background: linear-gradient(0deg, var(--btn-color-primay), var(--btn-color-accent));
+}
+
+.grid-highlight::after {
+    /* keep default pseudo-element disabled — we'll create multiple .streak children via JS */
+    display: none;
+}
+
+/* individual moving streaks (multiple per grid line) */
+.grid-highlight .streak {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 6%;
+    top: -14%;
+    /* visual style for the flowing line */
+    background: var(--btn-color-primay);
+    border-radius: 1px;
+    pointer-events: none;
+
+    /* animation controlled per-streak using CSS variables set from JS */
+    animation-name: gridLightMoveTop;
+    animation-duration: var(--streak-duration, 10s);
+    animation-timing-function: linear;
+    animation-delay: var(--streak-delay, 0s);
+    animation-iteration-count: infinite;
+}
+
+/* position each highlight to match the earlier percentage positions */
+.grid-highlight.l1 {
+    left: calc(7.4%);
+    transform: translateX(-50%);
+}
+
+.grid-highlight.l2 {
+    left: calc(28.65%);
+    transform: translateX(-50%);
+}
+
+.grid-highlight.l3 {
+    left: calc(49.9%);
+    transform: translateX(-50%);
+}
+
+.grid-highlight.l4 {
+    left: calc(71.15%);
+    transform: translateX(-50%);
+}
+
+.grid-highlight.l5 {
+    left: calc(92.4%);
+    transform: translateX(-50%);
+}
+
+.main {
+    position: relative;
+    z-index: 3;
+}
+
+@keyframes gridLightMoveTop {
+    0% {
+        top: -14%;
+        opacity: 0;
+    }
+
+    6% {
+        opacity: 1;
+    }
+
+    90% {
+        top: 100%;
+        opacity: 1;
+    }
+
+    98% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+.header {
+    width: 85%;
+    margin: auto;
+    padding: 15px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+    /* ensure content sits above the moving light */
+    /* content above the grid_lines (which is z-index:1 inside main-container) */
+}
+
+.header h1 {
+    color: var(--white);
+    animation: visibility 1s linear 1 forwards;
+}
+
+.navbar_container {
+    background-color: var(--navbar-background);
+    border-radius: 50px;
+    width: 48%;
+    padding: 20px 0px;
+    animation: visibility 1s linear 1 forwards;
+}
+
+.navbar_container nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar_container nav a {
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar_container nav a:hover {
+    color: var(--hover-text-color);
+}
+
+.header_cta button {
+    background: linear-gradient(90deg, var(--btn-color-primay), var(--btn-color-accent));
+    border-radius: 30px 30px 30px 30px;
+    padding: 17px 30px 17px 30px;
+    color: var(--black);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease,
+        color 0.3s ease;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: var(--font-primary);
+    animation: visibility 1s linear 1 forwards;
+}
+
+.header_cta button:hover {
+    background: linear-gradient(90deg, var(--btn-color-accent), var(--btn-color-primay));
+    transition: background-color 0.3s ease,
+        color 0.3s ease;
+    cursor: pointer;
+}
+
+
+
+@keyframes visibility {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+}
+
+.hero {
+    position: relative;
+    top: 5vh;
+    height: 10%;
+    width: 85%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.intro span {
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1.2em;
+    background: linear-gradient(90deg, #E0FF79, #76FDD0, #E0FF79);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 4s ease infinite;
+    /* animation: introspan 1s linear 1 forwards; */
+
+}
+
+.intro h2 {
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.2em;
+    color: var(--white);
+
+    animation: introspan 1s linear 1 forwards;
+}
+
+.intro p {
+    margin-top: 3vh;
+    font-size: 16px;
+    color: var(--white);
+    /* animation: introspan 1s linear 1 forwards; */
+}
+
+.intro h2,
+p {
+    animation: introspan 1s linear 1 forwards;
+
+}
+
+@keyframes introspan {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+
+}
+
+.hero_img {
+    width: 78%;
+
+    position: relative;
+    z-index: 2;
+    left: 20%;
+    top: -130px;
+}
+
+.hero_blob {
+    position: absolute;
+    width: 62%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+    right: 0;
+}
+
+.main_hero_right {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 426px) {
+    .navbar_container {
+        display: none;
+    }
+
+    .header_cta {
+        display: none;
+    }
+}
+
+
+@media (min-width: 427px) and (max-width: 769px) {
+    .navbar_container {
+        display: none;
+    }
+}
+
+/*SKILL CONTAINER LOOP STYLING*/
+.skills-container {
+    white-space: nowrap;
+    margin-top: -13vh;
+    overflow: hidden;
+    width: 98%;
+    height: 6vh;
+    padding: 10px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent) 50%, var(--btn-color-primay) 100%);
+}
+
+.skills-content {
+    display: inline-block;
+    padding-left: 100%;
+    animation: moveSkills 60s linear infinite;
+}
+
+.skill {
+    display: inline-block;
+    margin: 0 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: relative;
+    top: 1vh;
+    color: var(--black);
+}
+
+.skills-container img {
+    position: relative;
+    top: 1.5vh;
+    height: 30px;
+    width: 30px;
+}
+
+/*ANIMATIONS USED FOR SKILL COBTAINER */
+@keyframes moveSkills {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.skills-container {
+
+    white-space: nowrap;
+    margin-top: -13vh;
+    overflow: hidden;
+    width: 98%;
+    height: 6vh;
+    padding: 10px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent) 50%, var(--btn-color-primay) 100%);
+}
+
+.skills-content {
+    display: inline-block;
+    padding-left: 100%;
+    animation: moveSkills 20s linear infinite;
+}
+
+.skill {
+    display: inline-block;
+    margin: 0 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: relative;
+    top: 1vh;
+    color: var(--black);
+}
+
+.skills-container img {
+    position: relative;
+    top: 1.5vh;
+    height: 30px;
+    width: 30px;
+}
+
+/*ANIMATIONS USED FOR SKILL COBTAINER */
+@keyframes moveSkills {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.my_specialization {
+
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+
+
+
+}
+
+.main_specialization {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40vh;
+}
+
+.specialization_info p {
+
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 600;
+    animation: gradientMove 4s ease infinite;
+
+}
+
+.specialization_info span {
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1.2em;
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent) 50%, var(--btn-color-primay) 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 4s ease infinite;
+}
+
+.specialization_info h2 {
+    font-size: 42px;
+    color: var(--white);
+    animation: gradientMove 4s ease infinite;
+}
+
+.specialization_brief_info {
+    color: var(--white);
+    font-size: 16px;
+    animation: gradientMove 4s ease infinite;
+}
+
+.carousel {
+    overflow-x: auto;
+    width: 85%;
+    margin: 3em auto;
+    display: flex;
+    gap: 1em;
+    scroll-behavior: smooth;
+    anchor-name: --carousel;
+    scroll-snap-type: x mandatory;
+    scroll-marker-group: after;
+
+}
+
+.carousel::scroll-marker-group {
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+}
+
+.card::scroll-marker {
+    content: '';
+    height: 1em;
+    width: 1em;
+    background-color: var(--item-background-color);
+    border-radius: 50%;
+    margin-bottom: 10vh;
+}
+
+.card::scroll-marker:target-current {
+    background-color: var(--btn-color-primay);
+    background: linear-gradient(90deg, #E0FF79, #76FDD0);
+
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.card {
+    scroll-snap-align: start;
+    flex: 0 0 15em;
+    height: 250px;
+    width: 250px;
+    aspect-ratio: 5 / 3;
+    background-color: var(--item-background-color);
+    padding: 1em;
+    border-radius: .5em;
+    text-align: center;
+    align-items: center;
+    border: 2px solid var(--grid-line-color);
+}
+
+.main_about_us {
+    width: 85%;
+    margin: auto;
+    gap: 10px 10px;
+    display: flex;
+    margin-top: 35vh;
+}
+
+
+
+.about_info h2 {
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1.2em;
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent) 50%, var(--btn-color-primay) 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 4s ease infinite;
+}
+
+.about_info p {
+    margin-top: 5vh;
+    font-size: 18px;
+    color: var(--white);
+}
+
+.about_info span {
+
+    font-weight: 200;
+    color: var(--white);
+    animation: gradientMove 4s ease infinite;
+
+}
+
+.about_mail,
+.about_call {
+    display: flex;
+    gap: 40px;
+    margin-top: 8vh;
+}
+
+.mail_info span {
+    font-size: 18px;
+
+    color: var(--white);
+}
+
+.mail_info p {
+    font-size: 20px;
+    color: var(--white);
+}
+
+.about_call span {
+    font-size: 18px;
+    color: var(--white);
+}
+
+.call_info p {
+    font-size: 20px;
+    color: var(--white);
+}
+
+.calling {
+    width: 42%;
+
+}
+
+.about_box {
+    height: 180px;
+    width: 180px;
+    border-radius: 20px;
+    position: relative;
+    bottom: 30vh;
+    left: 80vh;
+    background-color: var(--item-background-color);
+    border: 2px solid var(--grid-line-color);
+
+}
+
+.about_box h1 {
+    font-size: 60px;
+    font-weight: 500;
+    text-align: center;
+
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent) 50%, var(--btn-color-primay) 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 4s ease infinite;
+}
+
+.about_box h3 {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--white);
+    text-align: center;
+}
+
+.my_tools_main {
+    width: 85%;
+    margin: auto;
+    margin-top: 20vh;
+}
+
+.my_tools_intro span {
+    font-size: 18px;
+    color: var(--white);
+}
+
+.my_tools_intro h2 {
+    font-size: 40px;
+    color: var(--white);
+    margin-top: 2vh;
+}
+
+.my_tools_intro h3 {
+    font-size: 40px;
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent) 50%, var(--btn-color-primay) 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 4s ease infinite;
+}
+
+.tools_container {
+    margin-top: 10vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+
+
+}
+
+.tools {
+    background-color: var(--item-background-color);
+
+    height: 17vh;
+    width: 27vw;
+    font-size: 20px;
+    border-radius: 20px;
+    border: 2px solid var(--grid-line-color);
+}
+
+.my_education {
+    width: 85%;
+    margin: auto;
+    margin-top: 35vh;
+}
+
+.my_education_intro {
+    text-align: center;
+}
+
+.my_education_intro span {
+    font-size: 18px;
+    color: var(--white);
+}
+
+.my_education_intro h2 {
+    font-size: 40px;
+    color: var(--white);
+    margin-top: 2vh;
+}
+
+.my_education_intro h3 {
+    font-size: 40px;
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent) 50%, var(--btn-color-primay) 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 4s ease infinite;
+}
+
+.my_education_info {
+    margin-top: 10vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.education_info {
+    background-color: var(--item-background-color);
+
+    height: 55vh;
+    width: 40.5vw;
+    font-size: 20px;
+    border-radius: 20px;
+    border: 2px solid var(--grid-line-color);
+}
+
+.contact_me_main {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    margin-top: 50vh;
+    justify-content: space-between;
+
+}
+
+.contact_me_details span {
+    font-size: 18px;
+    color: var(--white);
+}
+
+.contact_me_details h2 b {
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent) 50%, var(--btn-color-primay) 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 4s ease infinite;
+    font-weight: 600;
+}
+
+.contact_me_details h2 {
+    font-size: 40px;
+    color: var(--white);
+    margin-top: 2vh;
+    font-weight: 500;
+}
+
+.contact_me_details p {
+    font-size: 18px;
+    color: var(--white);
+    margin-top: 2vh;
+}
+
+.address_circle {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent));
+    /* background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+    animation: gradientMove 4s ease infinite;
+    position: relative;
+
+
+}
+
+.address_circle img {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.address_main {
+    display: flex;
+    margin-top: 5vh;
+}
+
+.address_details p {
+    font-size: 16px;
+    color: var(--white);
+    margin-top: 2vh;
+    margin-left: 2vh;
+}
+
+.address_details h3 {
+    color: var(--white);
+    margin-left: 2vh;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.call_circle {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent));
+    /* background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+    animation: gradientMove 4s ease infinite;
+    position: relative;
+
+}
+
+.call_circle img {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.call_circle {
+    display: flex;
+}
+
+.call_details p {
+    font-size: 16px;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-left: 2vh;
+}
+
+.call_details h3 {
+    color: var(--white);
+    margin-left: 2vh;
+    font-weight: 500;
+    font-size: 20px;
+
+}
+
+.call_main {
+    display: flex;
+    margin-top: 5vh;
+}
+
+.fill_contact_form {
+    height: 500px;
+    width: 550px;
+    background-color: var(--item-background-color);
+    border: 2px solid var(--input-container);
+    border-radius: 40px;
+    padding: 40px;
+
+}
+
+.fill_contact_info {
+    font-size: 16px;
+    color: var(--white);
+    margin-top: 2vh;
+}
+
+.fill_contact_inputs {
+    text-align: center;
+
+}
+
+.fill_contact_inputs input {
+    height: 60px;
+    width: 250px;
+    background-color: var(--input-fields);
+    border: 1px solid var(--grid-line-color);
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
+    color: var(--white);
+    font-size: 18px;
+
+}
+
+
+.fill_contact_inputs input::placeholder {
+    color: var(--white);
+    font-size: 18px;
+    position: relative;
+    left: 20px;
+
+}
+
+.msg {
+    text-align: center;
+}
+
+.msg input {
+    height: 200px;
+    width: 510px;
+    background-color: var(--input-fields);
+    border: 1px solid var(--grid-line-color);
+    border-radius: 10px;
+    margin-left: 1vh;
+    margin-top: 20px;
+
+
+}
+
+.msg input::placeholder {
+    color: var(--white);
+    font-size: 18px;
+    position: relative;
+    bottom: 10vh;
+    left: 4px;
+
+}
+
+.submit_form button {
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent));
+    color: var(--black);
+    font-size: 18px;
+    animation: gradientMove 4s ease infinite;
+    margin-top: 20px;
+
+}
