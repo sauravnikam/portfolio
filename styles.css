@@ -344,7 +344,7 @@ p {
     position: relative;
     z-index: 2;
     left: 20%;
-    top: -130px;
+    top: -53px;
 }
 
 .hero_blob {
@@ -354,6 +354,7 @@ p {
     object-fit: contain;
     z-index: 1;
     right: 0;
+    top: 184px;
 }
 
 .main_hero_right {
@@ -443,15 +444,16 @@ p {
 }
 
 .skills-container {
-
     white-space: nowrap;
-    margin-top: -13vh;
+    margin-top: -2vh;
     overflow: hidden;
     width: 98%;
     height: 6vh;
     padding: 10px;
     border-radius: 10px;
     background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent) 50%, var(--btn-color-primay) 100%);
+    position: relative;
+    z-index: 3;
 }
 
 .skills-content {
@@ -581,11 +583,11 @@ p {
     scroll-snap-align: start;
     flex: 0 0 15em;
     height: 250px;
-    width: 250px;
+    width: 270px;
     aspect-ratio: 5 / 3;
     background-color: var(--item-background-color);
     padding: 1em;
-    border-radius: .5em;
+    border-radius: 20px;
     text-align: center;
     align-items: center;
     border: 2px solid var(--grid-line-color);
@@ -987,5 +989,58 @@ p {
 
 }
 
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.card1 h1,
+.card2 h1,
+.card3 h1,
+.card4 h1,
+.card5 h1,
+.card6 h1 {
+    font-size: 23px;
+    color: var(--white);
+
+}
+
+.card1 img,
+.card2 img,
+.card3 img,
+.card4 img,
+.card5 img,
+.card6 img {
+    margin-right: 180px;
+
+}
+
 
 /* FOOTER CSS */
+
+footer {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent));
+    animation: gradientMove 4s ease infinite;
+    margin-top: 20vh;
+}
+
+.footer_heading {
+    width: 85%;
+    margin: auto;
+    position: relative;
+    top: 20vh;
+}
+
+.footer_heading h1 {
+    font-size: 80px;
+    color: var(--background-color);
+}
+
+.footer_heading p {
+    font-size: 20px;
+    color: var(--background-color);
+    margin-top: 2vh;
+}
