@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
 //IIFE 
 (function () {
     // PUBLIC KEY
@@ -119,6 +120,7 @@ const msgValidator = (text) => {
     return text.length > 0
 }
 
+// CALLING THIS FUNCTION AFTER SUBMITING THE FORM 
 const submitForm = () => {
     const emailValidation = emailValidator(email_address.value);
     const phnValidation = phoneValidator(phoneField.value);
@@ -126,6 +128,7 @@ const submitForm = () => {
     const lastNameValidation = stringValidator(surnameField.value);
     const msgValidation = msgValidator(msgField.value);
 
+    // CHECKING IF THE ALL INPUTS ARE FIELD BY USER OR NOT IF FILLED THEN SEND THE MAIL
     if (emailValidation && phnValidation && firstNameValidation && lastNameValidation && msgValidation) {
         let templateParams = {
             name: `${nameField.value} ${surnameField.value}`,
@@ -142,21 +145,35 @@ const submitForm = () => {
 
         emailjs.send(emailConfig.serviceId, emailConfig.templateId, templateParams)
             .then(res => {
-                console.log("SEND");
+
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Sent Successfully";
                 loading = false;
             })
             .catch(err => {
-                console.log(err);
+
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Try Again";
                 loading = false;
             });
-    } else {
+    }
+    // IF ALL DETAILS ARE NOT FILLED THEN SHOW THIS MESSAGE
+    else {
+
+
         result.innerText = "Please fill All details"
+        setTimeout(() => {
+            result.innerText = ""
+        }, 5000);
     }
 
 };
 
+// ADDING EVENT LISTNER TO SUBMIT BUTTON
 submitBtn.addEventListener("click", submitForm)
+
+
+
+//setTimeout(() => {
+//  message.style.display = 'none'; // Or use message.remove() to delete it entirely
+//}, 5000);

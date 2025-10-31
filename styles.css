@@ -967,6 +967,7 @@ p {
     text-align: center;
 
 
+
 }
 
 .fill_contact_inputs input {
@@ -1473,18 +1474,16 @@ footer {
 
     .about_box {
         position: relative;
-        left: 100px;
+        right: 100px;
         height: 150px;
-        width: 150px;
+        width: 300px;
     }
 
     .about_box h1 {
         font-size: 10px;
     }
 
-    .fill_contact_form {
-        display: none;
-    }
+
 
     .tools_container {
         display: grid;
@@ -1564,6 +1563,244 @@ footer {
         font-size: 27px;
     }
 
+
+    .my_education_intro span {
+        font-size: 16px;
+    }
+
+    .my_education_intro h2 {
+        font-size: 25px;
+    }
+
+    .my_education_intro h3 {
+        font-size: 25px;
+    }
+
+    .education_info {
+        width: 100%;
+    }
+
+    .edu_circle {
+        height: 50px;
+        width: 50px;
+    }
+
+    .edu_circle img {
+        height: 30px;
+        width: 30px;
+
+    }
+
+    .edu_info h1 {
+        font-size: 18px;
+
+
+    }
+
+    .edu_intro {
+        margin: 20px 20px;
+        /* margin-top: 20px;
+        margin-left: 20px; */
+    }
+
+    .edu_school_name h1 {
+        font-size: 20px;
+    }
+
+    .edu_school_name p {
+        font-size: 13px;
+    }
+
+    .edu_school_yr {
+        width: 76.5px;
+        height: 40px;
+        outline: none;
+
+    }
+
+    .edu_school_yr h1 {
+        font-size: 14px;
+    }
+
+    .contact {
+        flex-direction: column;
+    }
+
+    .fill_contact_form {
+        width: 250px;
+
+    }
+
+    .contact_me_main,
+    .fill_contact_form {
+        margin-top: 60px;
+    }
+
+    .fill_contact_info p {
+        font-size: 14px;
+        color: var(--white);
+    }
+
+    .fill_contact_inputs input {}
+
+
+
+    .contact_me_main_intro span {
+        font-size: 18px;
+    }
+
+    .contact_me_main_intro h1 {
+        font-size: 23.6px;
+        margin-top: 20px;
+    }
+
+    .contact_me_main_intro p {
+        font-size: 16px;
+        margin-top: 20px;
+        line-height: 25px;
+    }
+
+    .address_img {
+        height: 50px;
+        width: 50px;
+    }
+
+    .contact_me_main_details_call {
+        gap: 0;
+    }
+
+    .contact_me_main_address {
+        gap: 20px;
+    }
+
+    .inputGrp {
+        flex-direction: column;
+        gap: 0;
+
+    }
+
+    .fill_contact_inputs input {}
+
+    .msg {
+        margin-left: -20px;
+    }
+
+    .submit_form button {}
+
+
+    .footer_main_part2 {
+        flex-direction: column;
+    }
+
+    .footer_main_part_all {
+        flex-direction: column;
+    }
+
+
+    .footer_heading h1 {
+        font-size: 26px;
+
+    }
+
+    .footer_heading p {
+        font-size: 16px;
+        line-height: 20px;
+        margin-top: 20px;
+    }
+
+    .footer_main_part1 h1 {
+        font-size: 30px;
+
+    }
+
+    .footer_main_part1 p {
+        font-size: 16px;
+
+    }
+
+    .footer_min_part {
+        margin-top: 50px;
+    }
+
+    .footer_min_part a {
+        font-size: 14px;
+    }
+
+    .my_services_main .my_services_container {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        /* place-items: center;
+        gap: 30px; */
+
+
+    }
+
+    .my_services_main .my_services_container .my_tool {
+        height: 200px;
+        width: 200px;
+
+    }
+
+}
+
+.my_services_main {
+    width: 85%;
+    margin: 0 auto;
+    justify-content: space-between;
+    margin-top: 200px;
+
+
+}
+
+.my_services_container {
+    width: 85%;
+
+    justify-content: space-between;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    /* 3 boxes per row */
+    gap: 50px;
+
+
+    /* center boxes horizontally */
+}
+
+.my_services_container .my_tool {
+    flex: 0 0 15em;
+    height: 280px;
+    width: 318px;
+    aspect-ratio: 5 / 3;
+    background-color: var(--item-background-color);
+
+    border-radius: 20px;
+
+
+    border: 2px solid var(--grid-line-color);
+}
+
+.my_services_intro {
+    line-height: 60px;
+}
+
+.my_services_intro h1 {
+    color: var(--white);
+    text-align: center;
+    font-size: 40px;
+
+}
+
+.my_services_intro p {
+    color: var(--white);
+    text-align: center;
+    font-size: 20px;
+
+}
+
+.my_services_intro span {
+    background: linear-gradient(90deg, var(--btn-color-primay) 0%, var(--btn-color-accent));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .tools {
@@ -1597,6 +1834,88 @@ footer {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
+}
+
+
+
+.footer_heading hr {
+    opacity: 0.5;
+    margin-top: 50px;
+}
+
+.footer_main_part_all {
+    display: flex;
+    margin: 0 auto;
+    width: 85%;
+    justify-content: space-evenly;
+    margin-top: 100px;
+}
+
+.footer_main_part1 h1 {
+    color: var(--black);
+}
+
+
+.footer_main_part1 p {
+    font-size: 18px;
+    margin-top: 20px;
+    color: var(--black);
+}
+
+.footer_main_part2 {
+    display: flex;
+    gap: 200px;
+}
+
+.footer_min_part h1 {
+    font-size: 20px;
+    color: var(--black);
+}
+
+.footer_min_part nav a,
+.footer_min_part p {
+    display: block;
+    text-decoration: none;
+    font-size: 18px;
+    margin-top: 30px;
+    color: var(--black);
+    font-weight: 600;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.footer_min_part nav a:hover {
+    color: var(--white);
+    transition: 0.2s;
+}
+
+.footer_min_part p:hover {
+    color: var(--white);
+    transition: 0.2s;
+}
+
+.footer_heading {
+    margin-top: 200px;
+}
+
+
+
+.FOOTER_MAIN_MAIN hr {
+    opacity: 0.5;
+    margin-top: 50px;
+}
+
+.footer_ending {
+    display: flex;
+    width: 85%;
+    margin: 0 auto;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.footer_ending p {
+    font-size: 18px;
+    color: var(--black);
 }
 
 @media (min-width: 427px) and (max-width: 769px) {}
