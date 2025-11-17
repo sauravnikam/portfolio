@@ -91,6 +91,69 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const toolBoxes = document.querySelectorAll(".tools");
+
+    // Assign direction alternately (left or right)
+    toolBoxes.forEach((box, index) => {
+        box.classList.add(index % 2 === 0 ? "from-left" : "from-right");
+    });
+
+    // Intersection Observer for animation
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target); // Animate only once
+                }
+            });
+        },
+        { threshold: 0.2 }
+    );
+
+    toolBoxes.forEach(box => observer.observe(box));
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const tools = document.querySelectorAll(".my_tool");
+
+    // Assign direction alternately (left/right)
+    tools.forEach((tool, index) => {
+        tool.classList.add(index % 2 === 0 ? "from-left" : "from-right");
+    });
+
+    // Intersection Observer to trigger animation on scroll
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target); // animate only once
+                }
+            });
+        },
+        { threshold: 0.8 }
+    );
+
+    tools.forEach(tool => observer.observe(tool));
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //IIFE 
@@ -164,7 +227,8 @@ const submitForm = () => {
         result.innerText = "Please fill All details"
         setTimeout(() => {
             result.innerText = ""
-        }, 5000);
+
+        }, 2000);
     }
 
 };
